@@ -1,0 +1,33 @@
+{
+  "name": "gulp-targethtml",
+  "version": "0.0.0",
+  "description": "Preproces HTML files by using target tags",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dinoboff/gulp-targethtml.git"
+  },
+  "keywords": [
+    "gulpplugin",
+    "html",
+    "preprocessor"
+  ],
+  "author": "Damien Lebrun",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dinoboff/gulp-targethtml/issues"
+  },
+  "homepage": "https://github.com/dinoboff/gulp-targethtml",
+  "dependencies": {
+    "esprima": "^1.2.2",
+    "gulp-util": "^2.2.19",
+    "through2": "^0.5.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.5",
+    "gulp-jshint": "^1.6.4"
+  }
+}
