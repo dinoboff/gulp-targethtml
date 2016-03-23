@@ -27,18 +27,21 @@ function conditionalParser(target, expression) {
   }
 }
 
-function processContent(content, target) {
+function processContent(content, target, curlyTags) {
   return new Buffer(content.replace(blockPartern, function(match, $1, $2, $3) {
     // check if it's really targeted
     if (!conditionalParser(target, esprima.parse($1).body[0].expression)) {
       return '';
     } else {
-      return $3;
+      return $3.replace(/\{\{([^{}]*)\}\}/g, function(match, search) {
+        var replace = curlyTags[search];
+        return ('string' === typeof replace) ? replace : match;
+      });
     }
   }));
 }
 
-module.exports = function targetHtml(target) {
+module.exports = function targetHtml(target, curlyTags) {
   var stream = through.obj(function(file, enc, callback) {
 
     if (file.isNull()) {
@@ -51,7 +54,7 @@ module.exports = function targetHtml(target) {
 
     if (file.isBuffer()) {
       gutil.log('[targetHTML]', 'processing', file.path);
-      file.contents = processContent(file.contents.toString('utf-8'), target);
+      file.contents = processContent(file.contents.toString('utf-8'), target, curlyTags);
     }
 
     this.push(file);
